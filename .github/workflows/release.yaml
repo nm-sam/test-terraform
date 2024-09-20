@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+name: release
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: NethermindEth/github-workflows/.github/workflows/job-terraform-release.yaml@main
+    with:
+      repository_name: ${{ github.repository }}
+    secrets:
+      artifactory_access_token: ${{ secrets.ARTIFACTORY_ANGKOR_CONTRIBUTOR }}
